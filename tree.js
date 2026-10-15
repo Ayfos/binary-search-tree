@@ -154,8 +154,77 @@ class Tree {
             node.right = this.#deleteRecursive(node.right, successor.data);
         }
 
+
+
+
         return node;
     }
+
+    // Implementación de BFS--> todos los métodos necesitan una función callback
+    levelOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Se requiere una función callback");
+        }
+
+        if (this.root === null) return;
+
+        const queue = [this.root];
+
+        while (queue.length > 0) {
+            const node = queue.shift();  // saca al primero
+            callback(node.data);        // llamar al callback con el valor
+
+            if (node.left !== null) queue.push(node.left);
+            if (node.right !== null) queue.push(node.right);
+
+        }
+    }
+
+    inOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Se requiere una función callback");
+        }
+
+        function traverse(node) {
+            if (node === null) return;
+            traverse(node.left);
+            callback(node.data);
+            traverse(node.right);
+        }
+
+        traverse(this.root);
+    }
+
+    preOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Se requiere una función callback");
+        }
+
+        function traverse(node) {
+            if (node === null) return;
+            callback(node.data);
+            traverse(node.left);
+            traverse(node.right);
+        }
+
+        traverse(this.root);
+    }
+
+    postOrderForEach(callback) {
+        if (typeof callback !== "function") {
+            throw new Error("Se requiere una función callback");
+        }
+
+        function traverse(node) {
+            if (node === null) return;
+            traverse(node.left);
+            traverse(node.right);
+            callback(node.data);
+        }
+
+        traverse(this.root);
+    }
+
 }
 
 
