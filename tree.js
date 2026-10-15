@@ -92,14 +92,14 @@ class Tree {
             }
 
             if (value < current.data) {
-                if(current.left === null) {
+                if (current.left === null) {
                     current.left = newNode;
                     return;
                 }
                 current = current.left;
 
             } else {
-                if ( current.right === null) {
+                if (current.right === null) {
                     current.right = newNode;
                     return;
                 }
@@ -107,7 +107,59 @@ class Tree {
             }
         }
     }
+
+    //Método deleteItem(value)---> tiene tres casos según cuantos hijos tenga el nodo a eliminar
+    deleteItem(value) {
+        this.root = this.#deleteRecursive(this.root, value);
+    }
+
+    #deleteRecursive(node, value) {
+        // Caso base: nodo vacío → no existe
+        if (node === null) {
+            return null;
+        }
+
+        // Buscar el nodo
+        if (value < node.data) {
+            node.left = this.#deleteRecursive(node.left, value);
+        } else if (value > node.data) {
+            node.right = this.#deleteRecursive(node.right, value);
+        } else {
+            // ¡Encontrado! Aplicar los 3 casos
+
+            // Caso 1: sin hijos
+            if (node.left === null && node.right === null) {
+                return null;
+            }
+
+            // Caso 2: un solo hijo
+            if (node.left === null) {
+                return node.right;
+            }
+            if (node.right === null) {
+                return node.left;
+            }
+
+            // Caso 3: dos hijos
+            // Buscar el sucesor in-order (mínimo del subárbol derecho)
+            let successor = node.right;
+            while (successor.left !== null) {
+                successor = successor.left;
+            }
+
+            // Reemplazar el valor del nodo actual con el del sucesor
+            node.data = successor.data;
+
+            // Eliminar el sucesor del subárbol derecho
+            node.right = this.#deleteRecursive(node.right, successor.data);
+        }
+
+        return node;
+    }
 }
+
+
+
 
 
 

@@ -15,16 +15,28 @@ const tree = new Tree(array);
 console.log("=== Árbol inicial ===");
 prettyPrint(tree.root);
 
-// Insertar algunos valores
-tree.insert(6);
-tree.insert(50);
-tree.insert(100);
-tree.insert(5);   // ya existe, no debería cambiar nada
+// Caso 1: eliminar una hoja
+tree.deleteItem(3);
+console.log("\n=== Después de eliminar 3 (hoja) ===");
+prettyPrint(tree.root);
 
-console.log("\n=== Árbol después de insertar 6, 50, 100 (y probar duplicado 5) ===");
+// Caso 2: eliminar un nodo con un hijo
+tree.deleteItem(1);
+console.log("\n=== Después de eliminar 1 (un hijo) ===");
+prettyPrint(tree.root);
+
+// Caso 3: eliminar un nodo con dos hijos
+tree.deleteItem(4);
+console.log("\n=== Después de eliminar 4 (dos hijos) ===");
+prettyPrint(tree.root);
+
+// Eliminar un valor que no existe
+tree.deleteItem(999);
+console.log("\n=== Después de eliminar 999 (no existe) ===");
 prettyPrint(tree.root);
 
 // Verificar
-console.log("\nincludes(6):", tree.includes(6));   // true
-console.log("includes(50):", tree.includes(50));   // true
-console.log("includes(100):", tree.includes(100)); // true
+console.log("\nincludes(3):", tree.includes(3));   
+console.log("includes(1):", tree.includes(1));   
+console.log("includes(4):", tree.includes(4));   
+console.log("includes(5):", tree.includes(5));   
