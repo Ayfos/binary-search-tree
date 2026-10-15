@@ -256,6 +256,27 @@ class Tree {
         return calculateHeight(current);
         }
 
+        // Método depth(value) --> devuelve la profundidad del nodo con ese valor
+        depth(value) {
+            let current = this.root;
+            let depth = 0;
+        
+            while (current !== null) {
+                if (value === current.data) {
+                    return depth;
+                } else if (value < current.data) {
+                    current = current.left;
+                    depth++;
+                } else {
+                    current = current.right;
+                    depth++;
+                }
+            }
+        
+            return undefined;
+        }
+
+
     }
 
 
