@@ -307,6 +307,16 @@ class Tree {
             return checkBalanced(this.root);
         }
 
+        // método rebalance() --> reequilibra un árbol desequilibrado
+        rebalance() {
+            // 1. Recoger los valores en orden
+            const values = [];
+            this.inOrderForEach((value) => values.push(value));
+        
+            // 2. Reconstruir el árbol
+            this.root = this.#buildTree(values);
+        }
+
 
 
     }
