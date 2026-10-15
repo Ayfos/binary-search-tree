@@ -28,10 +28,34 @@ function buildTree(array) {
         return node;
 
     }
+}
 
-    // 3. llamar a la función recursiva
-    return buildRecursive(sortedArray, 0, sortedArray.length - 1);
+// Creamos la clase Tree--> generamos un método privado y la función buildTree la movemos dentro la clase método privado
 
+class Tree {
+    #buildTree(array) {
+        const sortedArray = [...new Set(array)].sort((a, b) => a - b);
+
+        function buildRecursive(arr, start, end) {
+            if (start > end) {
+                return null;
+            }
+
+            const mid = Math.floor((start + end) / 2);
+            const node = new Node(arr[mid]);
+
+            node.left = buildRecursive(arr, start, mid - 1);
+            node.right = buildRecursive(arr, mid + 1, end);
+
+            return node;
+        }
+
+        return buildRecursive(sortedArray, 0, sortedArray.length - 1);
+    }
+
+    constructor(array) {
+        this.root = this.#buildTree(array); //# método privado
+    }
 }
 
 
@@ -40,4 +64,5 @@ function buildTree(array) {
 
 
 
-export { Node, buildTree };
+
+export { Node, Tree };
