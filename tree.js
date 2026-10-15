@@ -56,6 +56,22 @@ class Tree {
     constructor(array) {
         this.root = this.#buildTree(array); //# método privado
     }
+
+    // Método includes(value) devuelve true si el valor está en el árbol, false sino
+    includes(value) {
+        let current = this.root;
+
+        while (current !== null) {
+            if (value === current.data) {
+                return true;
+            } else if (value < current.data) {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+        }
+        return false;
+    }
 }
 
 
