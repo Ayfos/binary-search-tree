@@ -1,11 +1,14 @@
 import { Tree } from "./tree.js";
 
-const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const tree = new Tree(array);
+// Árbol equilibrado
+const balancedArray = [1, 2, 3, 4, 5, 6, 7];
+const balancedTree = new Tree(balancedArray);
+console.log("Árbol equilibrado:", balancedTree.isBalanced());   // true
 
-console.log("depth(8):", tree.depth(8));         
-console.log("depth(4):", tree.depth(4));         
-console.log("depth(67):", tree.depth(67));       
-console.log("depth(1):", tree.depth(1));         
-console.log("depth(6345):", tree.depth(6345));   
-console.log("depth(999):", tree.depth(999));     
+// Árbol desequilibrado (añadimos valores altos)
+const unbalancedArray = [1, 2, 3, 4, 5];
+const unbalancedTree = new Tree(unbalancedArray);
+unbalancedTree.insert(100);
+unbalancedTree.insert(200);
+unbalancedTree.insert(300);
+console.log("Árbol desequilibrado:", unbalancedTree.isBalanced()); // false

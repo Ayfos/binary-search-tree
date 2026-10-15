@@ -276,6 +276,38 @@ class Tree {
             return undefined;
         }
 
+        // Método isBalanced() --> comprueba si el arbol está equilibrado
+        isBalanced() {
+            // Función interna que calcula la altura de un nodo
+            function getHeight(node) {
+                if (node === null) {
+                    return -1;
+                }
+                return 1 + Math.max(getHeight(node.left), getHeight(node.right));
+            }
+        
+            // Función interna que comprueba si un subárbol está equilibrado
+            function checkBalanced(node) {
+                if (node === null) {
+                    return true;
+                }
+        
+                const leftHeight = getHeight(node.left);
+                const rightHeight = getHeight(node.right);
+        
+                // Si la diferencia supera 1, no está equilibrado
+                if (Math.abs(leftHeight - rightHeight) > 1) {
+                    return false;
+                }
+        
+                // Comprobar recursivamente ambos subárboles
+                return checkBalanced(node.left) && checkBalanced(node.right);
+            }
+        
+            return checkBalanced(this.root);
+        }
+
+
 
     }
 
