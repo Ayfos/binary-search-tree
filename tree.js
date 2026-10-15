@@ -72,6 +72,41 @@ class Tree {
         }
         return false;
     }
+
+    // Método insert(value) ---> añade un nuevo nodo con ese valor respetando la propiedad BST
+    insert(value) {
+        const newNode = new Node(value);
+
+        //caso especial cuando el árbol está vacío
+        if (this.root === null) {
+            this.root = newNode;
+            return;
+        }
+
+        let current = this.root;
+
+        while (true) {
+            //valor duplicado no hace nada
+            if (value === current.data) {
+                return;
+            }
+
+            if (value < current.data) {
+                if(current.left === null) {
+                    current.left = newNode;
+                    return;
+                }
+                current = current.left;
+
+            } else {
+                if ( current.right === null) {
+                    current.right = newNode;
+                    return;
+                }
+                current = current.right;
+            }
+        }
+    }
 }
 
 
