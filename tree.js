@@ -225,7 +225,40 @@ class Tree {
         traverse(this.root);
     }
 
-}
+    //Método height(value)
+
+    height(value) {
+        //1. buscar el nodo
+        let current = this.root;
+        while (current !== null && current.data !== value) {
+            if (value < current.data) {
+                current = current.left;
+
+            }else {
+                current = current.right;
+            }
+        }
+
+        // si no se encuentra
+        if (current === null) {
+            return undefined;
+        }
+
+        // calcular la altura recursivamente
+        function calculateHeight(node) {
+            if (node === null) {
+                return -1;   // ← ojo con este -1
+            }
+            const leftHeight = calculateHeight(node.left);
+            const rightHeight = calculateHeight(node.right);
+            return 1 + Math.max(leftHeight, rightHeight);
+        }
+        return calculateHeight(current);
+        }
+
+    }
+
+
 
 
 
